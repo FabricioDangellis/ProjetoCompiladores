@@ -4,7 +4,7 @@ Este projeto implementa um **analisador léxico** para a linguagem [*OWL2*](http
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 O **Analisador Léxico para OWL2 (Manchester Syntax)** foi desenvolvido como parte de um estudo prático sobre a construção de compiladores e ferramentas de análise léxica. O projeto tem como objetivo o reconhecimento e categorização dos seguintes elementos da linguagem **OWL2** no formato **Manchester Syntax**:
 
