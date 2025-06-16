@@ -34,7 +34,7 @@ O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os
 - [Python](https://www.python.org/downloads/)
 - [Biblioteca PLY (Python Lex-Yacc)](https://pypi.org/project/ply/)
 
-### Execução
+### Execução Lexico
 
 1. Clone o repositório ou baixe o arquivo ZIP:
 
@@ -208,3 +208,100 @@ EquivalentTo:
 | CLASS_ID             | 4                     |
 | PROPERTY_ID          | 1                     |
 | SPECIAL_SYMBOL       | 4                     |
+
+### Execução Sintático
+
+1. Mude de branch
+
+   ```bash
+   git checkout SintaticAnalyzer
+   ```
+
+2. Mude para a pasta `src`:
+
+   ```bash
+   cd src
+   ```
+
+3. Execute o código:
+
+   ```bash
+   python main.py
+   ```
+
+4. Insira o nome do arquivo de teste (deve estar na pasta `src`):
+
+   ```bash
+   input.txt
+   ```
+---
+
+## Analisador Sintático
+
+- Validação da Estrutura Gramatical com regras formais da sintaxe Manchester
+
+- Relatórios de Erros Sintáticos, com linha e sugestão de correção
+
+- Classificação de Classes OWL:
+
+   - Primitiva ou Definida
+
+   - E também: Fechada, Enumerada, Aninhada ou Coberta
+
+- Identificação de Padrões Compostos:
+
+   - SubClassOf, EquivalentTo, DisjointClasses
+
+   - Operadores: some, only, and, or, min, value, comparações como [< 400]
+
+---
+
+## Classificações Realizadas
+
+Durante a análise sintática, as classes encontradas são classificadas automaticamente com base em seus construtores. Exemplo de saída:
+
+```
+====== CLASSIFICAÇÃO DAS CLASSES ======
+
+Pizza: Primitiva & Fechada
+HighCaloriePizza: Definida & Aninhada
+Spiciness: Definida & Enumerada
+SpicyPizza: Definida & Aninhada
+VegetarianPizza: Definida & Fechada & Coberta
+```
+---
+
+## Detecção de Erros Sintáticos
+
+Em caso de erro, o sistema informa:
+
+- A linha
+
+- O token inesperado
+
+- Uma dica de correção
+
+Exemplo:
+
+```
+Erro Sintático na linha 45: token inesperado 'min'. Dica: verifique se a estrutura da classe está correta.
+```
+---
+
+
+## Exemplo de Execução
+Arquivo de entrada (input.txt):
+
+```
+Class: VegetarianPizza
+EquivalentTo:
+    Pizza
+    and (hasTopping only
+    (CheeseTopping or VegetableTopping))
+```
+
+- Saída esperada:
+
+```
+VegetarianPizza: Definida & Fechada & Coberta
+```

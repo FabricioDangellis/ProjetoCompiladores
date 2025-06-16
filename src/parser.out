@@ -1,0 +1,1612 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ALL
+    KEYWORD
+    NOT
+    THAT
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> classes
+Rule 2     classes -> class_decl
+Rule 3     classes -> class_decl classes
+Rule 4     class_decl -> CLASS CLASS_ID subclass_section disjoint_section individuals_section
+Rule 5     class_decl -> CLASS CLASS_ID equivalentto_section disjoint_section individuals_section
+Rule 6     subclass_section -> SUBCLASSOF expression_list
+Rule 7     expression_list -> expression
+Rule 8     expression_list -> expression COMMA expression_list
+Rule 9     expression -> simple_expression
+Rule 10    expression -> cardinality_expression
+Rule 11    expression -> comparison_expression
+Rule 12    expression -> closure_expression
+Rule 13    expression -> nested_expression
+Rule 14    expression -> OPEN_PAREN expression_list CLOSE_PAREN
+Rule 15    expression -> CLASS_ID
+Rule 16    expression -> CLASS_ID AND expression
+Rule 17    expression -> CLASS_ID AND expression_list
+Rule 18    expression -> expression AND expression
+Rule 19    simple_expression -> PROPERTY_ID SOME CLASS_ID
+Rule 20    simple_expression -> PROPERTY_ID SOME DATATYPE
+Rule 21    cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID
+Rule 22    cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE
+Rule 23    cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID
+Rule 24    cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE
+Rule 25    cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+Rule 26    cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+Rule 27    comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+Rule 28    comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+Rule 29    comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+Rule 30    closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+Rule 31    nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+Rule 32    nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+Rule 33    nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+Rule 34    nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+Rule 35    covered_expr -> CLASS_ID
+Rule 36    covered_expr -> CLASS_ID OR CLASS_ID
+Rule 37    covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID
+Rule 38    covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID OR CLASS_ID
+Rule 39    individual -> CLASS_ID
+Rule 40    individual -> INDIVIDUAL_NAME
+Rule 41    equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+Rule 42    equivalentto_section -> EQUIVALENTTO expression_list
+Rule 43    equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID
+Rule 44    disjoint_section -> DISJOINTCLASSES disjoint_list
+Rule 45    disjoint_section -> empty
+Rule 46    disjoint_list -> CLASS_ID
+Rule 47    disjoint_list -> CLASS_ID COMMA disjoint_list
+Rule 48    individuals_section -> INDIVIDUALS individual_list
+Rule 49    individuals_section -> empty
+Rule 50    individual_list -> INDIVIDUAL_NAME
+Rule 51    individual_list -> INDIVIDUAL_NAME COMMA individual_list
+Rule 52    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ALL                  : 
+AND                  : 16 17 18
+CARDINALITY          : 21 22 23 24 25 26 27 28 29 33
+CLASS                : 4 5
+CLASS_ID             : 4 5 15 16 17 19 21 23 25 31 35 36 36 37 37 37 38 38 38 38 39 43 43 43 46 47
+CLOSE_BRACKET        : 27 28 29 33
+CLOSE_CURLY          : 41
+CLOSE_PAREN          : 14 30 31 32 33 34 34
+COMMA                : 8 41 41 47 51
+DATATYPE             : 20 22 24 26 27 28 29 32 33
+DISJOINTCLASSES      : 44
+EQUAL                : 27 29 33
+EQUIVALENTTO         : 41 42 43
+EXACTLY              : 25 26
+GREATER_THAN         : 27 33
+INDIVIDUALS          : 48
+INDIVIDUAL_NAME      : 40 41 41 41 50 51
+KEYWORD              : 
+LESS_THAN            : 28 29
+MAX                  : 23 24
+MIN                  : 21 22
+NOT                  : 
+ONLY                 : 30
+OPEN_BRACKET         : 27 28 29 33
+OPEN_CURLY           : 41
+OPEN_PAREN           : 14 30 31 32 33 34 34
+OR                   : 36 37 37 38 38 38 43 43
+PROPERTY_ID          : 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 34
+SOME                 : 19 20 27 28 29 31 32 33 34
+SUBCLASSOF           : 6
+THAT                 : 
+VALUE                : 34
+error                : 
+
+Nonterminals, with rules where they appear
+
+cardinality_expression : 10
+class_decl           : 2 3
+classes              : 1 3
+closure_expression   : 12
+comparison_expression : 11
+covered_expr         : 30
+disjoint_list        : 44 47
+disjoint_section     : 4 5
+empty                : 45 49
+equivalentto_section : 5
+expression           : 7 8 16 18 18
+expression_list      : 6 8 14 17 42
+individual           : 34
+individual_list      : 48 51
+individuals_section  : 4 5
+nested_expression    : 13
+program              : 0
+simple_expression    : 9
+subclass_section     : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . classes
+    (2) classes -> . class_decl
+    (3) classes -> . class_decl classes
+    (4) class_decl -> . CLASS CLASS_ID subclass_section disjoint_section individuals_section
+    (5) class_decl -> . CLASS CLASS_ID equivalentto_section disjoint_section individuals_section
+
+    CLASS           shift and go to state 4
+
+    program                        shift and go to state 1
+    classes                        shift and go to state 2
+    class_decl                     shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> classes .
+
+    $end            reduce using rule 1 (program -> classes .)
+
+
+state 3
+
+    (2) classes -> class_decl .
+    (3) classes -> class_decl . classes
+    (2) classes -> . class_decl
+    (3) classes -> . class_decl classes
+    (4) class_decl -> . CLASS CLASS_ID subclass_section disjoint_section individuals_section
+    (5) class_decl -> . CLASS CLASS_ID equivalentto_section disjoint_section individuals_section
+
+    $end            reduce using rule 2 (classes -> class_decl .)
+    CLASS           shift and go to state 4
+
+    class_decl                     shift and go to state 3
+    classes                        shift and go to state 5
+
+state 4
+
+    (4) class_decl -> CLASS . CLASS_ID subclass_section disjoint_section individuals_section
+    (5) class_decl -> CLASS . CLASS_ID equivalentto_section disjoint_section individuals_section
+
+    CLASS_ID        shift and go to state 6
+
+
+state 5
+
+    (3) classes -> class_decl classes .
+
+    $end            reduce using rule 3 (classes -> class_decl classes .)
+
+
+state 6
+
+    (4) class_decl -> CLASS CLASS_ID . subclass_section disjoint_section individuals_section
+    (5) class_decl -> CLASS CLASS_ID . equivalentto_section disjoint_section individuals_section
+    (6) subclass_section -> . SUBCLASSOF expression_list
+    (41) equivalentto_section -> . EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+    (42) equivalentto_section -> . EQUIVALENTTO expression_list
+    (43) equivalentto_section -> . EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID
+
+    SUBCLASSOF      shift and go to state 9
+    EQUIVALENTTO    shift and go to state 10
+
+    subclass_section               shift and go to state 7
+    equivalentto_section           shift and go to state 8
+
+state 7
+
+    (4) class_decl -> CLASS CLASS_ID subclass_section . disjoint_section individuals_section
+    (44) disjoint_section -> . DISJOINTCLASSES disjoint_list
+    (45) disjoint_section -> . empty
+    (52) empty -> .
+
+    DISJOINTCLASSES shift and go to state 12
+    INDIVIDUALS     reduce using rule 52 (empty -> .)
+    CLASS           reduce using rule 52 (empty -> .)
+    $end            reduce using rule 52 (empty -> .)
+
+    disjoint_section               shift and go to state 11
+    empty                          shift and go to state 13
+
+state 8
+
+    (5) class_decl -> CLASS CLASS_ID equivalentto_section . disjoint_section individuals_section
+    (44) disjoint_section -> . DISJOINTCLASSES disjoint_list
+    (45) disjoint_section -> . empty
+    (52) empty -> .
+
+    DISJOINTCLASSES shift and go to state 12
+    INDIVIDUALS     reduce using rule 52 (empty -> .)
+    CLASS           reduce using rule 52 (empty -> .)
+    $end            reduce using rule 52 (empty -> .)
+
+    disjoint_section               shift and go to state 14
+    empty                          shift and go to state 13
+
+state 9
+
+    (6) subclass_section -> SUBCLASSOF . expression_list
+    (7) expression_list -> . expression
+    (8) expression_list -> . expression COMMA expression_list
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 22
+    CLASS_ID        shift and go to state 23
+    PROPERTY_ID     shift and go to state 24
+
+    expression_list                shift and go to state 15
+    expression                     shift and go to state 16
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 10
+
+    (41) equivalentto_section -> EQUIVALENTTO . OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+    (42) equivalentto_section -> EQUIVALENTTO . expression_list
+    (43) equivalentto_section -> EQUIVALENTTO . CLASS_ID OR CLASS_ID OR CLASS_ID
+    (7) expression_list -> . expression
+    (8) expression_list -> . expression COMMA expression_list
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    OPEN_CURLY      shift and go to state 25
+    CLASS_ID        shift and go to state 27
+    OPEN_PAREN      shift and go to state 22
+    PROPERTY_ID     shift and go to state 24
+
+    expression_list                shift and go to state 26
+    expression                     shift and go to state 16
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 11
+
+    (4) class_decl -> CLASS CLASS_ID subclass_section disjoint_section . individuals_section
+    (48) individuals_section -> . INDIVIDUALS individual_list
+    (49) individuals_section -> . empty
+    (52) empty -> .
+
+    INDIVIDUALS     shift and go to state 29
+    CLASS           reduce using rule 52 (empty -> .)
+    $end            reduce using rule 52 (empty -> .)
+
+    individuals_section            shift and go to state 28
+    empty                          shift and go to state 30
+
+state 12
+
+    (44) disjoint_section -> DISJOINTCLASSES . disjoint_list
+    (46) disjoint_list -> . CLASS_ID
+    (47) disjoint_list -> . CLASS_ID COMMA disjoint_list
+
+    CLASS_ID        shift and go to state 32
+
+    disjoint_list                  shift and go to state 31
+
+state 13
+
+    (45) disjoint_section -> empty .
+
+    INDIVIDUALS     reduce using rule 45 (disjoint_section -> empty .)
+    CLASS           reduce using rule 45 (disjoint_section -> empty .)
+    $end            reduce using rule 45 (disjoint_section -> empty .)
+
+
+state 14
+
+    (5) class_decl -> CLASS CLASS_ID equivalentto_section disjoint_section . individuals_section
+    (48) individuals_section -> . INDIVIDUALS individual_list
+    (49) individuals_section -> . empty
+    (52) empty -> .
+
+    INDIVIDUALS     shift and go to state 29
+    CLASS           reduce using rule 52 (empty -> .)
+    $end            reduce using rule 52 (empty -> .)
+
+    individuals_section            shift and go to state 33
+    empty                          shift and go to state 30
+
+state 15
+
+    (6) subclass_section -> SUBCLASSOF expression_list .
+
+    DISJOINTCLASSES reduce using rule 6 (subclass_section -> SUBCLASSOF expression_list .)
+    INDIVIDUALS     reduce using rule 6 (subclass_section -> SUBCLASSOF expression_list .)
+    CLASS           reduce using rule 6 (subclass_section -> SUBCLASSOF expression_list .)
+    $end            reduce using rule 6 (subclass_section -> SUBCLASSOF expression_list .)
+
+
+state 16
+
+    (7) expression_list -> expression .
+    (8) expression_list -> expression . COMMA expression_list
+    (18) expression -> expression . AND expression
+
+  ! shift/reduce conflict for COMMA resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+    DISJOINTCLASSES reduce using rule 7 (expression_list -> expression .)
+    INDIVIDUALS     reduce using rule 7 (expression_list -> expression .)
+    CLASS           reduce using rule 7 (expression_list -> expression .)
+    $end            reduce using rule 7 (expression_list -> expression .)
+    CLOSE_PAREN     reduce using rule 7 (expression_list -> expression .)
+    COMMA           shift and go to state 34
+    AND             shift and go to state 35
+
+  ! COMMA           [ reduce using rule 7 (expression_list -> expression .) ]
+  ! AND             [ reduce using rule 7 (expression_list -> expression .) ]
+
+
+state 17
+
+    (9) expression -> simple_expression .
+
+    COMMA           reduce using rule 9 (expression -> simple_expression .)
+    AND             reduce using rule 9 (expression -> simple_expression .)
+    DISJOINTCLASSES reduce using rule 9 (expression -> simple_expression .)
+    INDIVIDUALS     reduce using rule 9 (expression -> simple_expression .)
+    CLASS           reduce using rule 9 (expression -> simple_expression .)
+    $end            reduce using rule 9 (expression -> simple_expression .)
+    CLOSE_PAREN     reduce using rule 9 (expression -> simple_expression .)
+
+
+state 18
+
+    (10) expression -> cardinality_expression .
+
+    COMMA           reduce using rule 10 (expression -> cardinality_expression .)
+    AND             reduce using rule 10 (expression -> cardinality_expression .)
+    DISJOINTCLASSES reduce using rule 10 (expression -> cardinality_expression .)
+    INDIVIDUALS     reduce using rule 10 (expression -> cardinality_expression .)
+    CLASS           reduce using rule 10 (expression -> cardinality_expression .)
+    $end            reduce using rule 10 (expression -> cardinality_expression .)
+    CLOSE_PAREN     reduce using rule 10 (expression -> cardinality_expression .)
+
+
+state 19
+
+    (11) expression -> comparison_expression .
+
+    COMMA           reduce using rule 11 (expression -> comparison_expression .)
+    AND             reduce using rule 11 (expression -> comparison_expression .)
+    DISJOINTCLASSES reduce using rule 11 (expression -> comparison_expression .)
+    INDIVIDUALS     reduce using rule 11 (expression -> comparison_expression .)
+    CLASS           reduce using rule 11 (expression -> comparison_expression .)
+    $end            reduce using rule 11 (expression -> comparison_expression .)
+    CLOSE_PAREN     reduce using rule 11 (expression -> comparison_expression .)
+
+
+state 20
+
+    (12) expression -> closure_expression .
+
+    COMMA           reduce using rule 12 (expression -> closure_expression .)
+    AND             reduce using rule 12 (expression -> closure_expression .)
+    DISJOINTCLASSES reduce using rule 12 (expression -> closure_expression .)
+    INDIVIDUALS     reduce using rule 12 (expression -> closure_expression .)
+    CLASS           reduce using rule 12 (expression -> closure_expression .)
+    $end            reduce using rule 12 (expression -> closure_expression .)
+    CLOSE_PAREN     reduce using rule 12 (expression -> closure_expression .)
+
+
+state 21
+
+    (13) expression -> nested_expression .
+
+    COMMA           reduce using rule 13 (expression -> nested_expression .)
+    AND             reduce using rule 13 (expression -> nested_expression .)
+    DISJOINTCLASSES reduce using rule 13 (expression -> nested_expression .)
+    INDIVIDUALS     reduce using rule 13 (expression -> nested_expression .)
+    CLASS           reduce using rule 13 (expression -> nested_expression .)
+    $end            reduce using rule 13 (expression -> nested_expression .)
+    CLOSE_PAREN     reduce using rule 13 (expression -> nested_expression .)
+
+
+state 22
+
+    (14) expression -> OPEN_PAREN . expression_list CLOSE_PAREN
+    (31) nested_expression -> OPEN_PAREN . PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> OPEN_PAREN . PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> OPEN_PAREN . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> OPEN_PAREN . PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+    (7) expression_list -> . expression
+    (8) expression_list -> . expression COMMA expression_list
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    PROPERTY_ID     shift and go to state 37
+    OPEN_PAREN      shift and go to state 22
+    CLASS_ID        shift and go to state 23
+
+    expression_list                shift and go to state 36
+    expression                     shift and go to state 16
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 23
+
+    (15) expression -> CLASS_ID .
+    (16) expression -> CLASS_ID . AND expression
+    (17) expression -> CLASS_ID . AND expression_list
+
+  ! shift/reduce conflict for AND resolved as shift
+    COMMA           reduce using rule 15 (expression -> CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 15 (expression -> CLASS_ID .)
+    INDIVIDUALS     reduce using rule 15 (expression -> CLASS_ID .)
+    CLASS           reduce using rule 15 (expression -> CLASS_ID .)
+    $end            reduce using rule 15 (expression -> CLASS_ID .)
+    CLOSE_PAREN     reduce using rule 15 (expression -> CLASS_ID .)
+    AND             shift and go to state 38
+
+  ! AND             [ reduce using rule 15 (expression -> CLASS_ID .) ]
+
+
+state 24
+
+    (19) simple_expression -> PROPERTY_ID . SOME CLASS_ID
+    (20) simple_expression -> PROPERTY_ID . SOME DATATYPE
+    (21) cardinality_expression -> PROPERTY_ID . MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> PROPERTY_ID . MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> PROPERTY_ID . MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> PROPERTY_ID . MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> PROPERTY_ID . EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> PROPERTY_ID . EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> PROPERTY_ID . ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+
+    SOME            shift and go to state 39
+    MIN             shift and go to state 40
+    MAX             shift and go to state 41
+    EXACTLY         shift and go to state 42
+    ONLY            shift and go to state 43
+
+
+state 25
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY . INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+
+    INDIVIDUAL_NAME shift and go to state 44
+
+
+state 26
+
+    (42) equivalentto_section -> EQUIVALENTTO expression_list .
+
+    DISJOINTCLASSES reduce using rule 42 (equivalentto_section -> EQUIVALENTTO expression_list .)
+    INDIVIDUALS     reduce using rule 42 (equivalentto_section -> EQUIVALENTTO expression_list .)
+    CLASS           reduce using rule 42 (equivalentto_section -> EQUIVALENTTO expression_list .)
+    $end            reduce using rule 42 (equivalentto_section -> EQUIVALENTTO expression_list .)
+
+
+state 27
+
+    (43) equivalentto_section -> EQUIVALENTTO CLASS_ID . OR CLASS_ID OR CLASS_ID
+    (15) expression -> CLASS_ID .
+    (16) expression -> CLASS_ID . AND expression
+    (17) expression -> CLASS_ID . AND expression_list
+
+  ! shift/reduce conflict for AND resolved as shift
+    OR              shift and go to state 45
+    COMMA           reduce using rule 15 (expression -> CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 15 (expression -> CLASS_ID .)
+    INDIVIDUALS     reduce using rule 15 (expression -> CLASS_ID .)
+    CLASS           reduce using rule 15 (expression -> CLASS_ID .)
+    $end            reduce using rule 15 (expression -> CLASS_ID .)
+    AND             shift and go to state 38
+
+  ! AND             [ reduce using rule 15 (expression -> CLASS_ID .) ]
+
+
+state 28
+
+    (4) class_decl -> CLASS CLASS_ID subclass_section disjoint_section individuals_section .
+
+    CLASS           reduce using rule 4 (class_decl -> CLASS CLASS_ID subclass_section disjoint_section individuals_section .)
+    $end            reduce using rule 4 (class_decl -> CLASS CLASS_ID subclass_section disjoint_section individuals_section .)
+
+
+state 29
+
+    (48) individuals_section -> INDIVIDUALS . individual_list
+    (50) individual_list -> . INDIVIDUAL_NAME
+    (51) individual_list -> . INDIVIDUAL_NAME COMMA individual_list
+
+    INDIVIDUAL_NAME shift and go to state 47
+
+    individual_list                shift and go to state 46
+
+state 30
+
+    (49) individuals_section -> empty .
+
+    CLASS           reduce using rule 49 (individuals_section -> empty .)
+    $end            reduce using rule 49 (individuals_section -> empty .)
+
+
+state 31
+
+    (44) disjoint_section -> DISJOINTCLASSES disjoint_list .
+
+    INDIVIDUALS     reduce using rule 44 (disjoint_section -> DISJOINTCLASSES disjoint_list .)
+    CLASS           reduce using rule 44 (disjoint_section -> DISJOINTCLASSES disjoint_list .)
+    $end            reduce using rule 44 (disjoint_section -> DISJOINTCLASSES disjoint_list .)
+
+
+state 32
+
+    (46) disjoint_list -> CLASS_ID .
+    (47) disjoint_list -> CLASS_ID . COMMA disjoint_list
+
+    INDIVIDUALS     reduce using rule 46 (disjoint_list -> CLASS_ID .)
+    CLASS           reduce using rule 46 (disjoint_list -> CLASS_ID .)
+    $end            reduce using rule 46 (disjoint_list -> CLASS_ID .)
+    COMMA           shift and go to state 48
+
+
+state 33
+
+    (5) class_decl -> CLASS CLASS_ID equivalentto_section disjoint_section individuals_section .
+
+    CLASS           reduce using rule 5 (class_decl -> CLASS CLASS_ID equivalentto_section disjoint_section individuals_section .)
+    $end            reduce using rule 5 (class_decl -> CLASS CLASS_ID equivalentto_section disjoint_section individuals_section .)
+
+
+state 34
+
+    (8) expression_list -> expression COMMA . expression_list
+    (7) expression_list -> . expression
+    (8) expression_list -> . expression COMMA expression_list
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 22
+    CLASS_ID        shift and go to state 23
+    PROPERTY_ID     shift and go to state 24
+
+    expression                     shift and go to state 16
+    expression_list                shift and go to state 49
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 35
+
+    (18) expression -> expression AND . expression
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 22
+    CLASS_ID        shift and go to state 23
+    PROPERTY_ID     shift and go to state 24
+
+    expression                     shift and go to state 50
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 36
+
+    (14) expression -> OPEN_PAREN expression_list . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 51
+
+
+state 37
+
+    (31) nested_expression -> OPEN_PAREN PROPERTY_ID . SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> OPEN_PAREN PROPERTY_ID . SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID . SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID . SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+    (19) simple_expression -> PROPERTY_ID . SOME CLASS_ID
+    (20) simple_expression -> PROPERTY_ID . SOME DATATYPE
+    (21) cardinality_expression -> PROPERTY_ID . MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> PROPERTY_ID . MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> PROPERTY_ID . MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> PROPERTY_ID . MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> PROPERTY_ID . EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> PROPERTY_ID . EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID . SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> PROPERTY_ID . ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+
+    SOME            shift and go to state 52
+    MIN             shift and go to state 40
+    MAX             shift and go to state 41
+    EXACTLY         shift and go to state 42
+    ONLY            shift and go to state 43
+
+
+state 38
+
+    (16) expression -> CLASS_ID AND . expression
+    (17) expression -> CLASS_ID AND . expression_list
+    (9) expression -> . simple_expression
+    (10) expression -> . cardinality_expression
+    (11) expression -> . comparison_expression
+    (12) expression -> . closure_expression
+    (13) expression -> . nested_expression
+    (14) expression -> . OPEN_PAREN expression_list CLOSE_PAREN
+    (15) expression -> . CLASS_ID
+    (16) expression -> . CLASS_ID AND expression
+    (17) expression -> . CLASS_ID AND expression_list
+    (18) expression -> . expression AND expression
+    (7) expression_list -> . expression
+    (8) expression_list -> . expression COMMA expression_list
+    (19) simple_expression -> . PROPERTY_ID SOME CLASS_ID
+    (20) simple_expression -> . PROPERTY_ID SOME DATATYPE
+    (21) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY CLASS_ID
+    (22) cardinality_expression -> . PROPERTY_ID MIN CARDINALITY DATATYPE
+    (23) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY CLASS_ID
+    (24) cardinality_expression -> . PROPERTY_ID MAX CARDINALITY DATATYPE
+    (25) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY CLASS_ID
+    (26) cardinality_expression -> . PROPERTY_ID EXACTLY CARDINALITY DATATYPE
+    (27) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> . PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (30) closure_expression -> . PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN
+    (31) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN
+    (33) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> . OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 22
+    CLASS_ID        shift and go to state 23
+    PROPERTY_ID     shift and go to state 24
+
+    expression                     shift and go to state 53
+    expression_list                shift and go to state 54
+    simple_expression              shift and go to state 17
+    cardinality_expression         shift and go to state 18
+    comparison_expression          shift and go to state 19
+    closure_expression             shift and go to state 20
+    nested_expression              shift and go to state 21
+
+state 39
+
+    (19) simple_expression -> PROPERTY_ID SOME . CLASS_ID
+    (20) simple_expression -> PROPERTY_ID SOME . DATATYPE
+    (27) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+    CLASS_ID        shift and go to state 55
+    DATATYPE        shift and go to state 56
+
+
+state 40
+
+    (21) cardinality_expression -> PROPERTY_ID MIN . CARDINALITY CLASS_ID
+    (22) cardinality_expression -> PROPERTY_ID MIN . CARDINALITY DATATYPE
+
+    CARDINALITY     shift and go to state 57
+
+
+state 41
+
+    (23) cardinality_expression -> PROPERTY_ID MAX . CARDINALITY CLASS_ID
+    (24) cardinality_expression -> PROPERTY_ID MAX . CARDINALITY DATATYPE
+
+    CARDINALITY     shift and go to state 58
+
+
+state 42
+
+    (25) cardinality_expression -> PROPERTY_ID EXACTLY . CARDINALITY CLASS_ID
+    (26) cardinality_expression -> PROPERTY_ID EXACTLY . CARDINALITY DATATYPE
+
+    CARDINALITY     shift and go to state 59
+
+
+state 43
+
+    (30) closure_expression -> PROPERTY_ID ONLY . OPEN_PAREN covered_expr CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 60
+
+
+state 44
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME . COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+
+    COMMA           shift and go to state 61
+
+
+state 45
+
+    (43) equivalentto_section -> EQUIVALENTTO CLASS_ID OR . CLASS_ID OR CLASS_ID
+
+    CLASS_ID        shift and go to state 62
+
+
+state 46
+
+    (48) individuals_section -> INDIVIDUALS individual_list .
+
+    CLASS           reduce using rule 48 (individuals_section -> INDIVIDUALS individual_list .)
+    $end            reduce using rule 48 (individuals_section -> INDIVIDUALS individual_list .)
+
+
+state 47
+
+    (50) individual_list -> INDIVIDUAL_NAME .
+    (51) individual_list -> INDIVIDUAL_NAME . COMMA individual_list
+
+    CLASS           reduce using rule 50 (individual_list -> INDIVIDUAL_NAME .)
+    $end            reduce using rule 50 (individual_list -> INDIVIDUAL_NAME .)
+    COMMA           shift and go to state 63
+
+
+state 48
+
+    (47) disjoint_list -> CLASS_ID COMMA . disjoint_list
+    (46) disjoint_list -> . CLASS_ID
+    (47) disjoint_list -> . CLASS_ID COMMA disjoint_list
+
+    CLASS_ID        shift and go to state 32
+
+    disjoint_list                  shift and go to state 64
+
+state 49
+
+    (8) expression_list -> expression COMMA expression_list .
+
+    DISJOINTCLASSES reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    INDIVIDUALS     reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    CLASS           reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    $end            reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    CLOSE_PAREN     reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    COMMA           reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+    AND             reduce using rule 8 (expression_list -> expression COMMA expression_list .)
+
+
+state 50
+
+    (18) expression -> expression AND expression .
+    (18) expression -> expression . AND expression
+
+  ! shift/reduce conflict for AND resolved as shift
+    COMMA           reduce using rule 18 (expression -> expression AND expression .)
+    DISJOINTCLASSES reduce using rule 18 (expression -> expression AND expression .)
+    INDIVIDUALS     reduce using rule 18 (expression -> expression AND expression .)
+    CLASS           reduce using rule 18 (expression -> expression AND expression .)
+    $end            reduce using rule 18 (expression -> expression AND expression .)
+    CLOSE_PAREN     reduce using rule 18 (expression -> expression AND expression .)
+    AND             shift and go to state 35
+
+  ! AND             [ reduce using rule 18 (expression -> expression AND expression .) ]
+
+
+state 51
+
+    (14) expression -> OPEN_PAREN expression_list CLOSE_PAREN .
+
+    COMMA           reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    AND             reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    CLASS           reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    $end            reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 14 (expression -> OPEN_PAREN expression_list CLOSE_PAREN .)
+
+
+state 52
+
+    (31) nested_expression -> OPEN_PAREN PROPERTY_ID SOME . CLASS_ID CLOSE_PAREN
+    (32) nested_expression -> OPEN_PAREN PROPERTY_ID SOME . DATATYPE CLOSE_PAREN
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME . DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME . OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+    (19) simple_expression -> PROPERTY_ID SOME . CLASS_ID
+    (20) simple_expression -> PROPERTY_ID SOME . DATATYPE
+    (27) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME . DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+    CLASS_ID        shift and go to state 66
+    DATATYPE        shift and go to state 67
+    OPEN_PAREN      shift and go to state 65
+
+
+state 53
+
+    (16) expression -> CLASS_ID AND expression .
+    (18) expression -> expression . AND expression
+    (7) expression_list -> expression .
+    (8) expression_list -> expression . COMMA expression_list
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! reduce/reduce conflict for DISJOINTCLASSES resolved using rule 7 (expression_list -> expression .)
+  ! reduce/reduce conflict for INDIVIDUALS resolved using rule 7 (expression_list -> expression .)
+  ! reduce/reduce conflict for CLASS resolved using rule 7 (expression_list -> expression .)
+  ! reduce/reduce conflict for $end resolved using rule 7 (expression_list -> expression .)
+  ! reduce/reduce conflict for CLOSE_PAREN resolved using rule 7 (expression_list -> expression .)
+  ! reduce/reduce conflict for COMMA resolved using rule 7 (expression_list -> expression .)
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for COMMA resolved as shift
+    AND             shift and go to state 35
+    DISJOINTCLASSES reduce using rule 7 (expression_list -> expression .)
+    INDIVIDUALS     reduce using rule 7 (expression_list -> expression .)
+    CLASS           reduce using rule 7 (expression_list -> expression .)
+    $end            reduce using rule 7 (expression_list -> expression .)
+    CLOSE_PAREN     reduce using rule 7 (expression_list -> expression .)
+    COMMA           shift and go to state 34
+
+  ! COMMA           [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! AND             [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! DISJOINTCLASSES [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! INDIVIDUALS     [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! CLASS           [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! $end            [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! CLOSE_PAREN     [ reduce using rule 16 (expression -> CLASS_ID AND expression .) ]
+  ! COMMA           [ reduce using rule 7 (expression_list -> expression .) ]
+  ! AND             [ reduce using rule 7 (expression_list -> expression .) ]
+
+
+state 54
+
+    (17) expression -> CLASS_ID AND expression_list .
+
+    COMMA           reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    AND             reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    DISJOINTCLASSES reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    INDIVIDUALS     reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    CLASS           reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    $end            reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+    CLOSE_PAREN     reduce using rule 17 (expression -> CLASS_ID AND expression_list .)
+
+
+state 55
+
+    (19) simple_expression -> PROPERTY_ID SOME CLASS_ID .
+
+    COMMA           reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    AND             reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    INDIVIDUALS     reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    CLASS           reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    $end            reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    CLOSE_PAREN     reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+
+
+state 56
+
+    (20) simple_expression -> PROPERTY_ID SOME DATATYPE .
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+    COMMA           reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    AND             reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    DISJOINTCLASSES reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    INDIVIDUALS     reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    CLASS           reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    $end            reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    CLOSE_PAREN     reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    OPEN_BRACKET    shift and go to state 68
+
+
+state 57
+
+    (21) cardinality_expression -> PROPERTY_ID MIN CARDINALITY . CLASS_ID
+    (22) cardinality_expression -> PROPERTY_ID MIN CARDINALITY . DATATYPE
+
+    CLASS_ID        shift and go to state 69
+    DATATYPE        shift and go to state 70
+
+
+state 58
+
+    (23) cardinality_expression -> PROPERTY_ID MAX CARDINALITY . CLASS_ID
+    (24) cardinality_expression -> PROPERTY_ID MAX CARDINALITY . DATATYPE
+
+    CLASS_ID        shift and go to state 71
+    DATATYPE        shift and go to state 72
+
+
+state 59
+
+    (25) cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY . CLASS_ID
+    (26) cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY . DATATYPE
+
+    CLASS_ID        shift and go to state 73
+    DATATYPE        shift and go to state 74
+
+
+state 60
+
+    (30) closure_expression -> PROPERTY_ID ONLY OPEN_PAREN . covered_expr CLOSE_PAREN
+    (35) covered_expr -> . CLASS_ID
+    (36) covered_expr -> . CLASS_ID OR CLASS_ID
+    (37) covered_expr -> . CLASS_ID OR CLASS_ID OR CLASS_ID
+    (38) covered_expr -> . CLASS_ID OR CLASS_ID OR CLASS_ID OR CLASS_ID
+
+    CLASS_ID        shift and go to state 76
+
+    covered_expr                   shift and go to state 75
+
+state 61
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA . INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY
+
+    INDIVIDUAL_NAME shift and go to state 77
+
+
+state 62
+
+    (43) equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID . OR CLASS_ID
+
+    OR              shift and go to state 78
+
+
+state 63
+
+    (51) individual_list -> INDIVIDUAL_NAME COMMA . individual_list
+    (50) individual_list -> . INDIVIDUAL_NAME
+    (51) individual_list -> . INDIVIDUAL_NAME COMMA individual_list
+
+    INDIVIDUAL_NAME shift and go to state 47
+
+    individual_list                shift and go to state 79
+
+state 64
+
+    (47) disjoint_list -> CLASS_ID COMMA disjoint_list .
+
+    INDIVIDUALS     reduce using rule 47 (disjoint_list -> CLASS_ID COMMA disjoint_list .)
+    CLASS           reduce using rule 47 (disjoint_list -> CLASS_ID COMMA disjoint_list .)
+    $end            reduce using rule 47 (disjoint_list -> CLASS_ID COMMA disjoint_list .)
+
+
+state 65
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN . PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    PROPERTY_ID     shift and go to state 80
+
+
+state 66
+
+    (31) nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID . CLOSE_PAREN
+    (19) simple_expression -> PROPERTY_ID SOME CLASS_ID .
+
+  ! shift/reduce conflict for CLOSE_PAREN resolved as shift
+    CLOSE_PAREN     shift and go to state 81
+    COMMA           reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+    AND             reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .)
+
+  ! CLOSE_PAREN     [ reduce using rule 19 (simple_expression -> PROPERTY_ID SOME CLASS_ID .) ]
+
+
+state 67
+
+    (32) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE . CLOSE_PAREN
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE . OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (20) simple_expression -> PROPERTY_ID SOME DATATYPE .
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE . OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+  ! shift/reduce conflict for CLOSE_PAREN resolved as shift
+    CLOSE_PAREN     shift and go to state 82
+    OPEN_BRACKET    shift and go to state 83
+    COMMA           reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+    AND             reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .)
+
+  ! CLOSE_PAREN     [ reduce using rule 20 (simple_expression -> PROPERTY_ID SOME DATATYPE .) ]
+
+
+state 68
+
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+    GREATER_THAN    shift and go to state 84
+    LESS_THAN       shift and go to state 85
+
+
+state 69
+
+    (21) cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .
+
+    COMMA           reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    AND             reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    INDIVIDUALS     reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    CLASS           reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    $end            reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+    CLOSE_PAREN     reduce using rule 21 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY CLASS_ID .)
+
+
+state 70
+
+    (22) cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .
+
+    COMMA           reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    AND             reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    DISJOINTCLASSES reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    INDIVIDUALS     reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    CLASS           reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    $end            reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+    CLOSE_PAREN     reduce using rule 22 (cardinality_expression -> PROPERTY_ID MIN CARDINALITY DATATYPE .)
+
+
+state 71
+
+    (23) cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .
+
+    COMMA           reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    AND             reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    INDIVIDUALS     reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    CLASS           reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    $end            reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+    CLOSE_PAREN     reduce using rule 23 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY CLASS_ID .)
+
+
+state 72
+
+    (24) cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .
+
+    COMMA           reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    AND             reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    DISJOINTCLASSES reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    INDIVIDUALS     reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    CLASS           reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    $end            reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+    CLOSE_PAREN     reduce using rule 24 (cardinality_expression -> PROPERTY_ID MAX CARDINALITY DATATYPE .)
+
+
+state 73
+
+    (25) cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .
+
+    COMMA           reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    AND             reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    DISJOINTCLASSES reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    INDIVIDUALS     reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    CLASS           reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    $end            reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+    CLOSE_PAREN     reduce using rule 25 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY CLASS_ID .)
+
+
+state 74
+
+    (26) cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .
+
+    COMMA           reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    AND             reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    DISJOINTCLASSES reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    INDIVIDUALS     reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    CLASS           reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    $end            reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+    CLOSE_PAREN     reduce using rule 26 (cardinality_expression -> PROPERTY_ID EXACTLY CARDINALITY DATATYPE .)
+
+
+state 75
+
+    (30) closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 86
+
+
+state 76
+
+    (35) covered_expr -> CLASS_ID .
+    (36) covered_expr -> CLASS_ID . OR CLASS_ID
+    (37) covered_expr -> CLASS_ID . OR CLASS_ID OR CLASS_ID
+    (38) covered_expr -> CLASS_ID . OR CLASS_ID OR CLASS_ID OR CLASS_ID
+
+    CLOSE_PAREN     reduce using rule 35 (covered_expr -> CLASS_ID .)
+    OR              shift and go to state 87
+
+
+state 77
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME . COMMA INDIVIDUAL_NAME CLOSE_CURLY
+
+    COMMA           shift and go to state 88
+
+
+state 78
+
+    (43) equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR . CLASS_ID
+
+    CLASS_ID        shift and go to state 89
+
+
+state 79
+
+    (51) individual_list -> INDIVIDUAL_NAME COMMA individual_list .
+
+    CLASS           reduce using rule 51 (individual_list -> INDIVIDUAL_NAME COMMA individual_list .)
+    $end            reduce using rule 51 (individual_list -> INDIVIDUAL_NAME COMMA individual_list .)
+
+
+state 80
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID . VALUE individual CLOSE_PAREN CLOSE_PAREN
+
+    VALUE           shift and go to state 90
+
+
+state 81
+
+    (31) nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .
+
+    COMMA           reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    AND             reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    CLASS           reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    $end            reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 31 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME CLASS_ID CLOSE_PAREN .)
+
+
+state 82
+
+    (32) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .
+
+    COMMA           reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    AND             reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    CLASS           reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    $end            reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 32 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE CLOSE_PAREN .)
+
+
+state 83
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET . GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . LESS_THAN CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET . LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET
+
+    GREATER_THAN    shift and go to state 91
+    LESS_THAN       shift and go to state 85
+
+
+state 84
+
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN . EQUAL CARDINALITY CLOSE_BRACKET
+
+    EQUAL           shift and go to state 92
+
+
+state 85
+
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN . CARDINALITY CLOSE_BRACKET
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN . EQUAL CARDINALITY CLOSE_BRACKET
+
+    CARDINALITY     shift and go to state 93
+    EQUAL           shift and go to state 94
+
+
+state 86
+
+    (30) closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .
+
+    COMMA           reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    AND             reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    CLASS           reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    $end            reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 30 (closure_expression -> PROPERTY_ID ONLY OPEN_PAREN covered_expr CLOSE_PAREN .)
+
+
+state 87
+
+    (36) covered_expr -> CLASS_ID OR . CLASS_ID
+    (37) covered_expr -> CLASS_ID OR . CLASS_ID OR CLASS_ID
+    (38) covered_expr -> CLASS_ID OR . CLASS_ID OR CLASS_ID OR CLASS_ID
+
+    CLASS_ID        shift and go to state 95
+
+
+state 88
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA . INDIVIDUAL_NAME CLOSE_CURLY
+
+    INDIVIDUAL_NAME shift and go to state 96
+
+
+state 89
+
+    (43) equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID .
+
+    DISJOINTCLASSES reduce using rule 43 (equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID .)
+    INDIVIDUALS     reduce using rule 43 (equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID .)
+    CLASS           reduce using rule 43 (equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID .)
+    $end            reduce using rule 43 (equivalentto_section -> EQUIVALENTTO CLASS_ID OR CLASS_ID OR CLASS_ID .)
+
+
+state 90
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE . individual CLOSE_PAREN CLOSE_PAREN
+    (39) individual -> . CLASS_ID
+    (40) individual -> . INDIVIDUAL_NAME
+
+    CLASS_ID        shift and go to state 98
+    INDIVIDUAL_NAME shift and go to state 99
+
+    individual                     shift and go to state 97
+
+state 91
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN . EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN . EQUAL CARDINALITY CLOSE_BRACKET
+
+    EQUAL           shift and go to state 100
+
+
+state 92
+
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL . CARDINALITY CLOSE_BRACKET
+
+    CARDINALITY     shift and go to state 101
+
+
+state 93
+
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 102
+
+
+state 94
+
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL . CARDINALITY CLOSE_BRACKET
+
+    CARDINALITY     shift and go to state 103
+
+
+state 95
+
+    (36) covered_expr -> CLASS_ID OR CLASS_ID .
+    (37) covered_expr -> CLASS_ID OR CLASS_ID . OR CLASS_ID
+    (38) covered_expr -> CLASS_ID OR CLASS_ID . OR CLASS_ID OR CLASS_ID
+
+    CLOSE_PAREN     reduce using rule 36 (covered_expr -> CLASS_ID OR CLASS_ID .)
+    OR              shift and go to state 104
+
+
+state 96
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME . CLOSE_CURLY
+
+    CLOSE_CURLY     shift and go to state 105
+
+
+state 97
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual . CLOSE_PAREN CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 106
+
+
+state 98
+
+    (39) individual -> CLASS_ID .
+
+    CLOSE_PAREN     reduce using rule 39 (individual -> CLASS_ID .)
+
+
+state 99
+
+    (40) individual -> INDIVIDUAL_NAME .
+
+    CLOSE_PAREN     reduce using rule 40 (individual -> INDIVIDUAL_NAME .)
+
+
+state 100
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL . CARDINALITY CLOSE_BRACKET CLOSE_PAREN
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL . CARDINALITY CLOSE_BRACKET
+
+    CARDINALITY     shift and go to state 107
+
+
+state 101
+
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 108
+
+
+state 102
+
+    (28) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .
+
+    COMMA           reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    AND             reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    DISJOINTCLASSES reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    INDIVIDUALS     reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    CLASS           reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    $end            reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+    CLOSE_PAREN     reduce using rule 28 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN CARDINALITY CLOSE_BRACKET .)
+
+
+state 103
+
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 109
+
+
+state 104
+
+    (37) covered_expr -> CLASS_ID OR CLASS_ID OR . CLASS_ID
+    (38) covered_expr -> CLASS_ID OR CLASS_ID OR . CLASS_ID OR CLASS_ID
+
+    CLASS_ID        shift and go to state 110
+
+
+state 105
+
+    (41) equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY .
+
+    DISJOINTCLASSES reduce using rule 41 (equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY .)
+    INDIVIDUALS     reduce using rule 41 (equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY .)
+    CLASS           reduce using rule 41 (equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY .)
+    $end            reduce using rule 41 (equivalentto_section -> EQUIVALENTTO OPEN_CURLY INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME COMMA INDIVIDUAL_NAME CLOSE_CURLY .)
+
+
+state 106
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 111
+
+
+state 107
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY . CLOSE_BRACKET CLOSE_PAREN
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 112
+
+
+state 108
+
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .
+
+    COMMA           reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    AND             reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    DISJOINTCLASSES reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    INDIVIDUALS     reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    CLASS           reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    $end            reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    CLOSE_PAREN     reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+
+
+state 109
+
+    (29) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .
+
+    COMMA           reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    AND             reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    DISJOINTCLASSES reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    INDIVIDUALS     reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    CLASS           reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    $end            reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    CLOSE_PAREN     reduce using rule 29 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET LESS_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+
+
+state 110
+
+    (37) covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID .
+    (38) covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID . OR CLASS_ID
+
+    CLOSE_PAREN     reduce using rule 37 (covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID .)
+    OR              shift and go to state 113
+
+
+state 111
+
+    (34) nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .
+
+    COMMA           reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    AND             reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    CLASS           reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    $end            reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 34 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME OPEN_PAREN PROPERTY_ID VALUE individual CLOSE_PAREN CLOSE_PAREN .)
+
+
+state 112
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET . CLOSE_PAREN
+    (27) comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .
+
+  ! shift/reduce conflict for CLOSE_PAREN resolved as shift
+    CLOSE_PAREN     shift and go to state 114
+    COMMA           reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+    AND             reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .)
+
+  ! CLOSE_PAREN     [ reduce using rule 27 (comparison_expression -> PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET .) ]
+
+
+state 113
+
+    (38) covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID OR . CLASS_ID
+
+    CLASS_ID        shift and go to state 115
+
+
+state 114
+
+    (33) nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .
+
+    COMMA           reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    AND             reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    DISJOINTCLASSES reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    INDIVIDUALS     reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    CLASS           reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    $end            reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 33 (nested_expression -> OPEN_PAREN PROPERTY_ID SOME DATATYPE OPEN_BRACKET GREATER_THAN EQUAL CARDINALITY CLOSE_BRACKET CLOSE_PAREN .)
+
+
+state 115
+
+    (38) covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID OR CLASS_ID .
+
+    CLOSE_PAREN     reduce using rule 38 (covered_expr -> CLASS_ID OR CLASS_ID OR CLASS_ID OR CLASS_ID .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for COMMA in state 16 resolved as shift
+WARNING: shift/reduce conflict for AND in state 16 resolved as shift
+WARNING: shift/reduce conflict for AND in state 23 resolved as shift
+WARNING: shift/reduce conflict for AND in state 27 resolved as shift
+WARNING: shift/reduce conflict for AND in state 50 resolved as shift
+WARNING: shift/reduce conflict for AND in state 53 resolved as shift
+WARNING: shift/reduce conflict for AND in state 53 resolved as shift
+WARNING: shift/reduce conflict for COMMA in state 53 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PAREN in state 66 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PAREN in state 67 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PAREN in state 112 resolved as shift
+WARNING: reduce/reduce conflict in state 53 resolved using rule (expression_list -> expression)
+WARNING: rejected rule (expression -> CLASS_ID AND expression) in state 53
+WARNING: Rule (expression -> CLASS_ID AND expression) is never reduced
