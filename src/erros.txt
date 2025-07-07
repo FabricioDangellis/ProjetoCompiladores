@@ -1,0 +1,26 @@
+Class: TestePizza
+SubClassOf:
+    hasTopping only (MozzarellaTopping or TomatoTopping),
+    hasTopping some CheeseTopping
+
+Class: InvalidPizza
+SubClassOf:
+    hasTopping some xsd:integer [<< 400]
+
+Class: Pessoa
+EquivalentTo:
+    ssn min 1 xsd:string,
+    ssn some Pessoa
+
+Class: AmericanPizza
+Individuals:
+    X1, X2
+EquivalentTo:
+    Pizza
+SubClassOf:
+    NamedPizza
+
+Class: Sobrecarregada
+SubClassOf:
+    hasTopping some MozzarellaTopping,  
+    hasTopping some xsd:string            

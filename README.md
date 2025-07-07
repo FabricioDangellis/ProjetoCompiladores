@@ -1,29 +1,27 @@
-# Analisador Léxico para OWL2 (Manchester Syntax)
+# Analisador Semântico para OWL2 (Manchester Syntax)
 
-Este projeto implementa um **analisador léxico** para a linguagem [*OWL2*](https://www.w3.org/TR/owl2-overview/) no formato [*Manchester Syntax*](https://www.w3.org/TR/owl2-manchester-syntax/), utilizando *Python* e a biblioteca *PLY*. O objetivo é identificar e categorizar os *tokens* presentes em uma ontologia descrita neste formato, produzindo uma tabela de símbolos como saída.
+Este projeto implementa um **analisador semântico** para a linguagem [*OWL2*](https://www.w3.org/TR/owl2-overview/) no formato [*Manchester Syntax*](https://www.w3.org/TR/owl2-manchester-syntax/), utilizando *Python*. O objetivo é identificar erros semânticos de precedência de operadores, coerção e sobrecarregamento.
 
 ---
 
 ## 📖 Sobre o Projeto
 
-O **Analisador Léxico para OWL2 (Manchester Syntax)** foi desenvolvido como parte de um estudo prático sobre a construção de compiladores e ferramentas de análise léxica. O projeto tem como objetivo o reconhecimento e categorização dos seguintes elementos da linguagem **OWL2** no formato **Manchester Syntax**:
+O **Analisador Semântico** foi desenvolvido como parte de um estudo prático sobre a construção de compiladores e ferramentas de análise semântica. O projeto realiza análise semântica sobre um código em uma linguagem ontológica baseada em classes e propriedades. Ela identifica erros semânticos que não são capturados pela análise léxica ou sintática, como:
 
-- Palavras reservadas;
-- Identificadores de classes e propriedades;
-- Nomes de indivíduos;
-- Tipos de dados;
-- Cardinalidades;
-- Símbolos especiais.
-
-O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os *tokens* encontrados, permitindo uma base sólida para análise sintática ou semântica posterior.
+- Ordem incorreta de seções;
+- Sobrecarga indevida de propriedades;
+- Uso de operadores inválidos;
+- Coerção de tipo malformada;
+- Uso de "only" antes de "some";
+- Classifica propriedades em Object Property ou Data Property;
 
 ---
 
 ## Ferramentas Utilizadas
 
-1. [**Python**](https://www.python.org/downloads/):
+1. **Python**
 
-2. [**PLY (Python Lex-Yacc)**](https://www.dabeaz.com/ply/):
+2. **RE:** Serve para trabalhar com expressões regulares em Python. Ela permite buscar, validar, extrair ou substituir padrões de texto complexos com muito mais poder do que simples comparações de strings.
 
 ---
 
@@ -34,7 +32,7 @@ O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os
 - [Python](https://www.python.org/downloads/)
 - [Biblioteca PLY (Python Lex-Yacc)](https://pypi.org/project/ply/)
 
-### Execução Lexico
+### Execução Semântico
 
 1. Clone o repositório ou baixe o arquivo ZIP:
 
@@ -45,7 +43,7 @@ O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os
 2. Acesse a pasta do repositório:
 
    ```bash
-   cd lexical_analyzer
+   cd ProjetoCompiladores
    ```
 
 3. Instale a biblioteca PLY:
@@ -54,95 +52,149 @@ O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os
    pip install ply
    ```
 
-4. Mude para a pasta `src`:
+4. Baixe todas as alterações de todas as branches remotas para o seu repositório local:
+
+   ```bash
+   git fetch --all
+   ```
+
+5. Altere para a branch semantic_analyzer:
+
+   ```bash
+   git checkout SemanticAnalyzer 
+   ```
+6. Atualize a branch:
+
+   ```bash
+   git pull origin SemanticAnalyzer 
+   ```
+
+7. Mude para a pasta `src`:
 
    ```bash
    cd src
    ```
 
-5. Execute o código:
+8. Execute o código:
 
    ```bash
-   python lexical_analyzer.py
+   python semantic_analyzer.py
    ```
 
-6. Insira o nome do arquivo de teste (deve estar na pasta `src`):
+9. Insira o nome do arquivo de teste (deve estar na pasta `src`):
 
    ```bash
-   input.txt
+   erros.txt
    ```
 
-7. Escolha as opções do menu interativo para:
+10. Escolha a opção "Análise Semântica" do menu interativo para:
 
-   - Visualizar tokens processados;
-   - Exibir a tabela de símbolos;
-   - Consultar a contagem de tokens.
+   - Análise Léxica
+   - Análise Sintática
+   - Análise Semântica
 
+   OBS: Também é possivel ver as implementações dos analisadores lexico e sintático, basta escolher a opção correspondente dos mesmos.
 ---
 
 ## Funcionalidades
 
-- **Reconhecimento de Tokens:** palavras reservadas, classes, propriedades, indivíduos, tipos de dados, símbolos especiais e cardinalidades da linguagem **OWL2** no formato **Manchester Syntax**.
+- **Verificação de Semântica de Classes OWLs:** analisa construções de classes OWL2 escritas em Manchester Syntax e detecta inconsistências semânticas comuns.
 
-- **Geração de Tabela de Símbolos:** organiza e exibe todos os *tokens* identificados.
+- **Classificação de Propriedades:** oidentifica automaticamente o tipo de cada propriedade como ***Data Property*** ou ***Object Property***.
 
-- **Registro de Erros Léxicos:** detecta e lista *tokens* inválidos encontrados durante o processamento.
+- **Detecção de Sobrecarga de Propriedades:** sinaliza propriedades indevidamente usadas como Data e Object simultaneamente.
 
-- **Menu Interativo:** permite a navegação e visualização de resultados
+- **Verificação de Ordem dos Cabeçalhos:** valida a sequência correta das seções "Class:", "EquivalentTo:", "SubClassOf:", "DisjointClasses:" e "Individuals:".
+
+- **Verificação de Expressões de Fechamento:** garante que only só apareça após some na mesma propriedade.
+
+- **Detecção de Coerção de Tipo:** identifica valores com operadores relacionais (>=, <=, etc.) sem tipos de dados explícitos.
+
+- **Detecção de Operadores Inválidos:** localiza operadores não suportados pela sintaxe como <<, ==>, ===, entre outros.
+
+- **Relatório Semântico Ordenado:** exibe todos os erros com indicação da linha e mensagens descritivas.
 
 ---
 
-## Descrição dos Tokens
+## Regras de Análise Semântica
 
-### 1. `KEYWORD`
+### 1. Ordem dos Cabeçalhos
 
-*Tokens* que representam as **palavras reservadas** da linguagem:
+A sequência das seções dentro de uma classe deve seguir a ordem canônica:
 
-- *some, all, value, min, max, exactly, that*
-- *not, and, or, only*
-- *Class, EquivalentTo, Individuals, SubClassOf, DisjointClasses* 
+```
+Class:
+EquivalentTo:
+SubClassOf:
+DisjointClasses:
+Individuals:
+```
+A seção Individuals: não pode aparecer antes de DisjointClasses:.
 
-   - Todos sucedidos por `:` (indicam tipos na linguagem OWL)
+### 2. Primeira Seção Após Class
 
-### 2. `CLASS_ID`
+Após a linha Class: NomeDaClasse, a primeira seção obrigatória deve ser EquivalentTo: ou SubClassOf:.
 
-*Tokens* que representam **identificadores de classes** na ontologia:
+### 3. Ordem de Quantificadores
+Dentro de uma mesma propriedade, only não pode aparecer antes de some.
 
-- Começam com letra maiúscula, p.ex.: *Pizza*.
-- Nomes compostos concatenados e com iniciais maiúsculas, p.ex.: *VegetarianPizza*.
-- Nomes compostos separados por *underline*, p.ex.: *Margherita_Pizza*.
+```
+Correto:
+hasTopping some CheeseTopping
+hasTopping only CheeseTopping
 
-### 3. `PROPERTY_ID` 
+Incorreto:
+hasTopping only CheeseTopping
+hasTopping some CheeseTopping  # ❌ Erro
+```
 
-*Tokens* que representam **identificadores de propriedades** das classes:
+### 4. Coerção de Tipos com Operadores
 
-- Começam com `has`, seguidos de uma string simples ou composta, p.ex.: *hasTopping*, *hasBase*.
-- Começam com `is`, seguidos de qualquer coisa, e terminam com `Of`, p.ex.: *isToppingOf*, *isBaseOf*.
-- Nomes de propriedades geralmente começam com letra minúscula e são seguidos por qualquer outra sequência de letras, p.ex.: *ssn*, *numberOfPizzasPurchased*.
+Expressões como [>= 18], [< 100], etc. devem vir acompanhadas de tipos de dados explícitos, como xsd:int.
 
-### 4. `INDIVIDUAL_NAME`
+```
+Correto:
+hasAge some xsd:int [>= 18]
 
-*Tokens* que identificam os **nomes de indivíduos** (instâncias específicas de classes):
+Incorreto:
+hasAge some [>= 18]  # ❌ Erro
+```
 
-- Começam com uma letra maiúscula, seguida de qualquer combinação de letras minúsculas e terminando com um número. Exemplo: *Customer1*, *Pizza1*, *Waiter2*.
+### 5. Operadores Inválidos
 
-### 5. `DATATYPE`
+Os seguintes operadores não são válidos e geram erro:
 
-*Tokens* que representam os **tipos de dados** nativos das linguagens OWL, RDF, RDFs ou XML Schema:
+   - <<, >>, ><, <>, ==>, ===
 
-- Exemplos: *owl:real*, *rdf:langString*, *rdfs:Literal*, *xsd:string*.
 
-### 6. `SPECIAL_SYMBOL`
+### 6. Sobrecarga de Propriedades
 
-*Tokens* que representam **símbolos especiais** utilizados para estruturar expressões:
+Uma propriedade não pode ser usada como Data Property e Object Property ao mesmo tempo.
 
-- Exemplos: *`[`, `]`, `{`, `}`, `(`, `)`, `<`, `>`, `=`,`,`.*
+```
+Correto:
+hasPrice some xsd:decimal
+hasIngredient some Cheese
 
-### 7. `CARDINALITY`
+Incorreto:
+hasValue some xsd:int
+hasValue some Ingredient  # ❌ Erro de sobrecarga
+```
+---
 
-*Tokens* que especificam restrições numéricas para relações ou propriedades:
+## Classificação das Propiedades
 
-- Exemplo: *hasTopping min **3***
+Durante a análise, cada propriedade é classificada automaticamente:
+
+```
+==== Classificação das Propriedades ====
+
+hasAge: Data Property
+hasTopping: Object Property
+isBaseOf: Object Property
+```
+
+   Propriedades sobrecarregadas (usadas como data e object) não aparecem nesta lista.
 
 ---
 
@@ -151,157 +203,51 @@ O resultado é uma **tabela de símbolos** e **relatórios detalhados** sobre os
 ### Entrada
 
 ```
-Class: VegetarianPizza
+Class: TestePizza
+SubClassOf:
+    hasTopping only (MozzarellaTopping or TomatoTopping),
+    hasTopping some CheeseTopping
+
+Class: InvalidPizza
+SubClassOf:
+    hasTopping some xsd:integer [<< 400]
+
+Class: Pessoa
+EquivalentTo:
+    ssn min 1 xsd:string,
+    ssn some Pessoa
+
+Class: AmericanPizza
+Individuals:
+    X1, X2
 EquivalentTo:
     Pizza
-    and (hasTopping only
-    (CheeseTopping or VegetableTopping))
-```
+SubClassOf:
+    NamedPizza
 
-### Saída Esperada
-
-- Tokens Processados
-
-|**Token**            | **Valor**               | **Linha** | **Posição** |
-|-----------------------|-------------------------|-----------|-------------|
-| KEYWORD              | Class:                 | 1         | 0           |
-| CLASS_ID             | VegetarianPizza        | 1         | 7           |
-| KEYWORD              | EquivalentTo:          | 2         | 23          |
-| CLASS_ID             | Pizza                  | 3         | 41          |
-| KEYWORD              | and                    | 4         | 51          |
-| SPECIAL_SYMBOL       | (                      | 4         | 55          |
-| PROPERTY_ID          | hasTopping             | 4         | 56          |
-| KEYWORD              | only                   | 4         | 67          |
-| SPECIAL_SYMBOL       | (                      | 5         | 76          |
-| CLASS_ID             | CheeseTopping          | 5         | 77          |
-| KEYWORD              | or                     | 5         | 91          |
-| CLASS_ID             | VegetableTopping       | 5         | 94          |
-| SPECIAL_SYMBOL       | )                      | 5         | 110         |
-| SPECIAL_SYMBOL       | )                      | 5         | 111         |
-
-<br>
-
-- Tabela de Símbolos
-
-| **Token**            | **Valor**              |
-|-----------------------|------------------------|
-| KEYWORD              | Class:                |
-| CLASS_ID             | VegetarianPizza       |
-| KEYWORD              | EquivalentTo:         |
-| CLASS_ID             | Pizza                 |
-| KEYWORD              | and                   |
-| SPECIAL_SYMBOL       | (                     |
-| PROPERTY_ID          | hasTopping            |
-| KEYWORD              | only                  |
-| CLASS_ID             | CheeseTopping         |
-| KEYWORD              | or                    |
-| CLASS_ID             | VegetableTopping      |
-| SPECIAL_SYMBOL       | )                     |
-
-<br>
-
-- Contagem de Tokens
-
-| **Token**            | **Quantidade**        |
-|-----------------------|-----------------------|
-| KEYWORD              | 5                     |
-| CLASS_ID             | 4                     |
-| PROPERTY_ID          | 1                     |
-| SPECIAL_SYMBOL       | 4                     |
-
-### Execução Sintático
-
-1. Mude de branch
-
-   ```bash
-   git checkout SintaticAnalyzer
-   ```
-
-2. Mude para a pasta `src`:
-
-   ```bash
-   cd src
-   ```
-
-3. Execute o código:
-
-   ```bash
-   python main.py
-   ```
-
-4. Insira o nome do arquivo de teste (deve estar na pasta `src`):
-
-   ```bash
-   input.txt
-   ```
----
-
-## Analisador Sintático
-
-- Validação da Estrutura Gramatical com regras formais da sintaxe Manchester
-
-- Relatórios de Erros Sintáticos, com linha e sugestão de correção
-
-- Classificação de Classes OWL:
-
-   - Primitiva ou Definida
-
-   - E também: Fechada, Enumerada, Aninhada ou Coberta
-
-- Identificação de Padrões Compostos:
-
-   - SubClassOf, EquivalentTo, DisjointClasses
-
-   - Operadores: some, only, and, or, min, value, comparações como [< 400]
-
----
-
-## Classificações Realizadas
-
-Durante a análise sintática, as classes encontradas são classificadas automaticamente com base em seus construtores. Exemplo de saída:
+Class: Sobrecarregada
+SubClassOf:
+    hasTopping some MozzarellaTopping,  
+    hasTopping some xsd:string            
 
 ```
-====== CLASSIFICAÇÃO DAS CLASSES ======
 
-Pizza: Primitiva & Fechada
-HighCaloriePizza: Definida & Aninhada
-Spiciness: Definida & Enumerada
-SpicyPizza: Definida & Aninhada
-VegetarianPizza: Definida & Fechada & Coberta
+## Análise Realizadas
+
+Exemplo de saída:
+
+```
+==== CLASSIFICAÇÃO DAS PROPRIEDADES ====
+ssn: Object Property
+
+======= ERROS SEMÂNTICOS ========
+Linha 3: O "only" não pode aparecer antes de "some" na classe "TestePizza".
+Linha 3: Propriedade 'hasTopping' está sobrecarregada como data property e object property.
+Linha 8: Operador inválido '<<'.
+Linha 12: Tipo indefinido ou inválido da propriedade 'ssn'.
+Linha 16: A seção 'Individuals' não pode aparecer antes de 'DisjointClasses:'.
+Linha 16: A classe "AmericanPizza" não pode iniciar com "Individuals".
+Linha 23: Ordem inválida de cabeçalhos na classe "Sobrecarregada".
+Linha 25: Tipo indefinido ou inválido da propriedade 'hasTopping'.
 ```
 ---
-
-## Detecção de Erros Sintáticos
-
-Em caso de erro, o sistema informa:
-
-- A linha
-
-- O token inesperado
-
-- Uma dica de correção
-
-Exemplo:
-
-```
-Erro Sintático na linha 45: token inesperado 'min'. Dica: verifique se a estrutura da classe está correta.
-```
----
-
-
-## Exemplo de Execução
-Arquivo de entrada (input.txt):
-
-```
-Class: VegetarianPizza
-EquivalentTo:
-    Pizza
-    and (hasTopping only
-    (CheeseTopping or VegetableTopping))
-```
-
-- Saída esperada:
-
-```
-VegetarianPizza: Definida & Fechada & Coberta
-```
